@@ -1,3 +1,7 @@
+:root {
+  --color-bg: #fff;
+  --color-main: #000;
+}
 * {
   margin: 0;
   padding: 0;
@@ -10,8 +14,8 @@ body {
   height: 100vh;
   width: 100vw;
   padding: 48px 32px;
-  background: #fff;
-  color: #000;
+  background: var(--color-bg);
+  color: var(--color-main);
   font-family: Helvetica, sans-serif;
   overflow: hidden;
 }
@@ -55,6 +59,7 @@ header button {
   background-color: grey;
   border-radius: 100%;
   content: "";
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 span {
@@ -64,7 +69,7 @@ span {
   width: 100%;
   padding: 12px 0;
   font-size: 20px;
-  color: #000;
+  color: var(--color-main);
   transform: translateX(-50%);
 }
 
@@ -85,15 +90,54 @@ main button {
   font-size: 32px;
   border: solid 0.3vw;
   font-family: Arial, Helvetica, sans-serif;
-  background: #000;
-  background: #fff;
-  color: #fff;
-  color: #000;
+  background: var(--color-main);
+  background: var(--color-bg);
+  color: var(--color-bg);
+  /* dodawanie dwóch właściwości z różnymi wartościami pozwala na podałszą dynamiczną zmiane tych kolorów ???? */
+  color: var(--color-main);
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
 }
 
 main button:hover {
-  background: #000;
+  background: var(--color-main);
+  color: var(--color-bg);
+}
+
+/* DARK MODE  - wariand 2 dla trybu ciemnego*/
+/* 
+body.dark,
+body.dark main button {
+  background: var(--color-main);
   color: #fff;
+}
+
+body.dark button:hover {
+  background: #fff;
+  color: var(--color-main);
+} */
+
+/* Zmienne w CSS - wariant 3 */
+
+body.dark {
+  --color-bg: #000;
+  --color-main: #fff;
+}
+
+body.dark .icon {
+  background: yellow;
+  transform: translateX(85px);
+}
+
+body.dark .icon::after {
+  /* pseudoelement */
+  display: block;
+  position: absolute;
+  left: -5px;
+  top: 5px;
+  height: 50px;
+  width: 45px;
+  content: "";
+  background-color: #000;
+  border-radius: 100%;
 }
