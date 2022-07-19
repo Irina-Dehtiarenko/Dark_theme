@@ -82,7 +82,6 @@ main {
 p {
   padding: 12px 0;
   font-size: 24px;
-  /* text-align: center; */
 }
 main button {
   margin: 24px 0;
@@ -93,7 +92,6 @@ main button {
   background: var(--color-main);
   background: var(--color-bg);
   color: var(--color-bg);
-  /* dodawanie dwóch właściwości z różnymi wartościami pozwala na podałszą dynamiczną zmiane tych kolorów ???? */
   color: var(--color-main);
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
@@ -104,20 +102,21 @@ main button:hover {
   color: var(--color-bg);
 }
 
-/* DARK MODE  - wariand 2 dla trybu ciemnego*/
-/* 
-body.dark,
-body.dark main button {
-  background: var(--color-main);
-  color: #fff;
+/* LIGHT MODE */
+
+body.light {
+  --color-bg: #fff;
+  --color-main: #000;
 }
 
-body.dark button:hover {
-  background: #fff;
-  color: var(--color-main);
-} */
+body.light .icon {
+  background: grey;
+  transform: translateX(0);
+}
 
-/* Zmienne w CSS - wariant 3 */
+body.light .icon::after {
+  content: none;
+}
 
 body.dark {
   --color-bg: #000;
@@ -140,4 +139,29 @@ body.dark .icon::after {
   content: "";
   background-color: #000;
   border-radius: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* ustawia się dla urządeń z preferowanem trybem ciemnym */
+  body {
+    --color-bg: #000;
+    --color-main: #fff;
+  }
+
+  body .icon {
+    background: yellow;
+    transform: translateX(85px);
+  }
+
+  body .icon::after {
+    display: block;
+    position: absolute;
+    left: -5px;
+    top: 5px;
+    height: 50px;
+    width: 45px;
+    content: "";
+    background-color: #000;
+    border-radius: 100%;
+  }
 }
